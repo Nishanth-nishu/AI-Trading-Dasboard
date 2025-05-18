@@ -1,6 +1,7 @@
+##![Forex Dashboard arcitecture]
 ![deepseek_mermaid_20250518_62caac](https://github.com/user-attachments/assets/437c9cf5-836b-48c4-9a8a-97d689695185)# AI-Powered Forex Trading Dashboard
 
-![Forex Dashboard Screenshot](static/images/dashboard-screenshot.png) *(example screenshot placeholder)*
+![Forex Dashboard arcitecture](static/images/dashboard-screenshot.png) 
 
 ## 🚀 Overview
 An intelligent Forex trading platform that combines real-time market data analysis with AI-driven pattern recognition and risk management recommendations. The system analyzes currency pairs, identifies trading opportunities using technical indicators and Gemini AI, and provides actionable insights with proper risk parameters.
