@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Risk Management{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Risk Management Plan</h1>
+        
+        {% if not risk_plan %}
+        <div class="alert alert-warning">
+            No risk management plan available. Please analyze some currency pairs first from the <a href="{{ url_for('index') }}">dashboard</a>.
+        </div>
+        {% else %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">Overall Risk Management Strategy</h5>
+            </div>
+            <div class="card-body">
+                <div class="risk-plan bg-light p-3 rounded">
+                    {{ risk_plan | replace('\n', '<br>') | safe }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if recommendations %}
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">Current Trade Risk Summary</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pair</th>
+                                <th>Action</th>
+                                <th>Entry</th>
+                                <th>Stop Loss</th>
+                                <th>Take Profit</th>
+                                <th>Risk-Reward</th>
+                                <th>Position Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pair, rec in recommendations.items() %}
+                            <tr>
+                                <td>{{ pair }}</td>
+                                <td>
+                                    <span class="badge {% if rec.recommendation == 'BUY' %}bg-success{% elif rec.recommendation == 'SELL' %}bg-danger{% else %}bg-secondary{% endif %}">
+                                        {{ rec.recommendation }}
+                                    </span>
+                                </td>
+                                <td>{{ rec.entry_price }}</td>
+                                <td>{{ rec.stop_loss }}</td>
+                                <td>{{ rec.take_profit }}</td>
+                                <td>{{ rec.risk_reward_ratio }}</td>
+                                <td>{{ rec.position_sizing_percentage }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

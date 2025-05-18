@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis Results{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Forex Analysis Results</h1>
+        
+        {% if not recommendations and not chart_files %}
+        <div class="alert alert-warning">
+            No analysis results available. Please analyze some currency pairs first from the <a href="{{ url_for('index') }}">dashboard</a>.
+        </div>
+        {% endif %}
+        
+        {% for pair, rec in recommendations.items() %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center 
+                {% if rec.recommendation == 'BUY' %}bg-success{% elif rec.recommendation == 'SELL' %}bg-danger{% else %}bg-secondary{% endif %} text-white">
+                <h5 class="mb-0">{{ pair }} - {{ rec.recommendation }} Recommendation</h5>
+                <span class="badge bg-light text-dark">Confidence: {{ rec.confidence }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Trading Strategy:</h6>
+                        <p>{{ rec.strategy }}</p>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-header">Entry Price</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ rec.entry_price }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-header">Risk-Reward</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ rec.risk_reward_ratio }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-header">Stop Loss</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ rec.stop_loss }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light mb-3">
+                                    <div class="card-header">Take Profit</div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ rec.take_profit }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        {% for chart in chart_files %}
+                            {% if chart.pair == pair %}
+                            <img src="{{ url_for('static', filename=chart.path) }}" alt="{{ pair }} Chart" class="img-fluid rounded">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                {% if pair in analysis_texts %}
+                <div class="mt-4">
+                    <h6>Detailed Analysis:</h6>
+                    <div class="analysis-text bg-light p-3 rounded">
+                        {{ analysis_texts[pair] | replace('\n', '<br>') | safe }}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

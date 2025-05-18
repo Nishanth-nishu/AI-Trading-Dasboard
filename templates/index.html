@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Forex Trading Dashboard</h1>
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Select Currency Pairs for Analysis</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('analyze') }}">
+                    <div class="row">
+                        {% for pair in currency_pairs %}
+                        <div class="col-md-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="currency_pairs" id="{{ pair }}" value="{{ pair }}" checked>
+                                <label class="form-check-label" for="{{ pair }}">
+                                    {{ pair }}
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">
+                        <i class="bi bi-graph-up"></i> Analyze Selected Pairs
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="{{ url_for('analysis') }}" class="btn btn-outline-info me-md-2">
+                        <i class="bi bi-bar-chart-line"></i> View Latest Analysis
+                    </a>
+                    <a href="{{ url_for('risk') }}" class="btn btn-outline-info">
+                        <i class="bi bi-shield-check"></i> Risk Management Plan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
