@@ -62,21 +62,92 @@ An intelligent trading assistant that leverages AI for technical analysis, patte
 
 ---
 
-## 📂 Project Structure (Optional)
+## 📂 Project Structure 
 
+
+## 📁 Root Directory
+
+```
 forex_trading_dashboard/
-├── app.py                  # Main Flask application
-├── config.py               # Configuration file (API keys)
-├── requirements.txt        # Python dependencies
+├── app.py
+├── config.py
+├── requirements.txt
+├── forex_trader.py
 ├── static/
-│   ├── css/
-│   │   └── styles.css      # Custom CSS
-│   ├── js/
-│   │   └── scripts.js      # Custom JavaScript
-│   └── images/             # Generated charts will go here
 ├── templates/
-│   ├── base.html           # Base template
-│   ├── index.html          # Main dashboard page
-│   ├── analysis.html       # Detailed analysis page
-│   └── risk.html           # Risk management page
-└── forex_trader.py         # Your trading analysis code (modified)
+```
+
+---
+
+### 📄 app.py
+
+- **Purpose:** Entry point of the Flask web application.
+- **Responsibility:** Handles routing, rendering templates, and integrating trading logic.
+
+---
+
+### ⚙️ config.py
+
+- **Purpose:** Stores configuration variables such as API keys and constants.
+- **Tip:** Keep sensitive info out of version control (use `.env` for secrets).
+
+---
+
+### 📦 requirements.txt
+
+- **Purpose:** Lists all Python dependencies.
+- **Use:** Run `pip install -r requirements.txt` to install required packages.
+
+---
+
+### 📊 forex_trader.py
+
+- **Purpose:** Core logic for:
+  - Fetching data
+  - Calculating technical indicators
+  - Performing pattern recognition
+  - Generating trade signals and risk constraints
+
+---
+
+## 🎨 static/
+
+Contains static assets like CSS, JavaScript, and images.
+
+```
+static/
+├── css/
+│   └── styles.css          # Custom styles for UI
+├── js/
+│   └── scripts.js          # Custom interactivity/animations
+└── images/                 # Generated or static charts/images
+```
+
+---
+
+## 🧩 templates/
+
+Contains HTML templates rendered by Flask.
+
+```
+templates/
+├── base.html               # Base layout (header/footer)
+├── index.html              # Homepage/dashboard view
+├── analysis.html           # Detailed market analysis page
+└── risk.html               # Risk management visualization
+```
+
+---
+
+### ✅ Summary
+
+This structure promotes **modularity**, **clarity**, and **scalability**:
+
+- 👨‍💻 **app.py** runs the server
+- 🧠 **forex_trader.py** handles trading intelligence
+- 🎨 **static/** and **templates/** define your UI
+- ⚙️ **config.py** and **requirements.txt** handle setup and environment
+
+---
+
+Feel free to customize or expand this structure based on project needs (e.g., adding `tests/`, `logs/`, `notebooks/`).ng analysis code (modified)
