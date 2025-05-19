@@ -150,5 +150,71 @@ This structure promotes **modularity**, **clarity**, and **scalability**:
 - ⚙️ **config.py** and **requirements.txt** handle setup and environment
 
 ---
+# ⚙️ Environment Setup – AI Trading Assistant
 
+This guide walks you through setting up your environment to run the **AI Trading Assistant** project.
+
+---
+
+## 🐍 Step 1: Create & Activate Virtual Environment
+
+```bash
+python -m venv venv
+# For Linux/Mac:
+source venv/bin/activate
+# For Windows:
+venv\Scripts\activate
+```
+
+---
+
+## 📦 Step 2: Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🔐 Step 3: Configure Environment Variables
+
+Create a `.env` file from the provided template and update it with your API keys:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your credentials:
+
+```ini
+POLYGON_API_KEY=your_polygon_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
+FLASK_SECRET_KEY=your_random_secret_string
+```
+
+---
+
+## 📂 Step 4: Initialize Required Directories
+
+```bash
+mkdir -p static/data static/images
+```
+
+These folders are used for storing generated charts and data files.
+
+---
+
+## 🚀 Step 5: Run the Application
+
+```bash
+python app.py
+```
+
+Your AI-powered trading dashboard will now be available locally on `http://127.0.0.1:5000/`.
+
+---
+
+### ✅ You're All Set!
+
+Happy Trading! 📈💡 If you encounter any issues, check your environment variables and installed dependencies first.
 Feel free to customize or expand this structure based on project needs (e.g., adding `tests/`, `logs/`, `notebooks/`).ng analysis code (modified)
